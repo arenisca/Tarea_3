@@ -21,7 +21,6 @@
             <version>4.13.2</version> <!-- o la versión que necesites -->
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
