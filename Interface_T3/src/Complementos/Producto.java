@@ -1,31 +1,22 @@
 package Complementos;
 
-/**
- * Clase abstracta {@code Producto} que representa un producto en general.
- * Los productos se identifican por un número de serie, el cual es proporcionado
- * al momento de su creación
- */
 public abstract class Producto {
-    // Los productos solo se les entregará serie porque el precio estará en los enum
+    /**
+     * Clase abstracta que representa un producto cualquiera.
+     * Los productos se identifican por un número de serie, el cual es proporcionado
+     * al momento de su creación.
+     * @param Producto es un método que obtiene la serie del producto
+     * @param serie es el número de serie único del producto
+     * @param getSerie retorna la serie del producto
+     *
+     * El precio de los productos estarán almacenados en los enum
+     */
+
     protected int serie;
-
-    /**
-     * @param serie el número de serie único del producto
-     */
-    public Producto(int serie) {
-        this.serie = serie;
-    }
-
-    /**
-     * @return el número de serie del producto
-     */
+    public Producto(int serie) { this.serie = serie; }
+    /** @return el número de serie del producto */
     public int getSerie() {
         return serie;
     }
-
-    /**
-     * Método abstracto que debe ser implementado por las clases que extiendan
-     * {@code Producto}
-     */
     public abstract String consumir();
 }
