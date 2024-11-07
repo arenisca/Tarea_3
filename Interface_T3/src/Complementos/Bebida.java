@@ -6,9 +6,10 @@ package Complementos;
  */
 abstract class Bebida extends Producto {
     /**
-     * @param serie el número de serie único de la bebida
+     * @param serie es el número de serie único para la bebida
      */
     public Bebida(int serie) {
         super(serie);
     }
+
 }
