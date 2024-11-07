@@ -1,21 +1,14 @@
 package Complementos;
 
-/**
- * Clase {@code Super8} que representa un dulce de tipo Super8.
- */
 public class Super8 extends Dulce {
-
     /**
-     * @param serie el número de serie único
+     * Esta subclase simula el consumo de un Super8
+     * @param serie el número de serie único.
      */
     public Super8(int serie) {
         super(serie);
     }
-
-    /**
-     * @return una cadena que describe el consumo
-     */
-    @Override
+    /** @return retorna una cadena que indica el consumo del dulce*/
     public String consumir() {
         return "ñam super8";
     }
