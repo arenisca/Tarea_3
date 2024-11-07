@@ -1,17 +1,15 @@
 package Complementos;
 
 /**
- * Clase {@code Moneda100} que representa una moneda de 100 unidades.
- * Extiende la clase abstracta {@code Moneda} e implementa el método {@code getValor}.
+ * La subclase {@code Moneda100} representa una moneda de 100 unidades.
+ * Extiende la superclase abstracta {@code Moneda}
+ * Implementa el método {@code getValor}.
  */
 public class Moneda100 extends Moneda {
-    public Moneda100() {
-    }
-
+    public Moneda100() { }
     /**
-     * @return el valor de la moneda, que es 100
+     * @return el valor de la moneda --> 100
      */
-    @Override
     public int getValor() {
         return 100;
     }
