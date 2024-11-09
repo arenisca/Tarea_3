@@ -31,5 +31,9 @@ public class Deposito<T> {
         }
         return productos.remove(0);
     }
+    public boolean isEmpty(){
+        return productos.isEmpty();
+    }
+
 }
 

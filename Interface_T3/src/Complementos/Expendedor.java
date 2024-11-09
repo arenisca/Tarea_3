@@ -1,12 +1,21 @@
 package Complementos;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /*
  * @author Gabriela Escalona
  * @author Valentina Serón
  * @version version 2, 03 de octubre 2024
+ * @version version 3, 07 de octubre 2024
  */
 
-
 class Expendedor {
+    /** Clase: Expendedor de productos!
+     * @code depositos serán los productos a almacenar
+     * @code monedaPago la moneda con que se pagará
+     * @code monedaVuelto la moneda a retornar al usuario
+     * @code producto será el producto que va a retornar al usuario */
 
     private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
@@ -14,172 +23,98 @@ class Expendedor {
     private Deposito<Producto> fanta;
     private Deposito<Producto> snickers;
     private Deposito<Producto> super8;
-
+    private ArrayList<Deposito<Producto>> depositos;
+    private Deposito<Moneda> monedaPago;
+    private Deposito<Moneda> monedaVuelto;
+    private int c = 100;
+    private int size;
+    private Producto producto;
 
     public Expendedor(int numProductos){
-        fanta = new Deposito<Producto>();
-        coca = new Deposito<Producto>();
-        sprite = new Deposito<Producto>();
-        coin = new Deposito<Moneda>();
-        snickers = new Deposito<Producto>();
-        super8 = new Deposito<Producto>();
+        fanta = new Deposito<>();
+        coca = new Deposito<>();
+        sprite = new Deposito<>();
+        coin = new Deposito<>();
+        snickers = new Deposito<>();
+        super8 = new Deposito<>();
+        depositos = new ArrayList<>();
+        monedaPago = new Deposito<>();
+        monedaVuelto = new Deposito<>();
 
-        for(int i = 0; i < numProductos; i++){
-            Bebida b1 = new Cocacola(100+i);
-            Bebida b2 = new Sprite(200+i);
-            Bebida b3 = new Fanta(300+i);
-            Dulce d1 = new Snickers(400+i);
-            Dulce d2 = new Super8(500+i);
+        depositos.add(coca);
+        depositos.add(sprite);
+        depositos.add(fanta);
+        depositos.add(snickers);
+        depositos.add(super8);
 
-            coca.addProducto(b1);
-            sprite.addProducto(b2);
-            fanta.addProducto(b3);
-            snickers.addProducto(d1);
-            super8.addProducto(d2);
+        for(Seleccionador p : Seleccionador.values()){
+            for(int i = 0; i < size; i++){
+                Producto producto = p.crearProducto(i+c);
+                depositos.get(p.ordinal()).addProducto(producto);
+            }
+            c=c+ 100;
         }
     }
 
-    public Producto comprarProducto(Moneda m, int cual) throws NoHayProductoException, PagoIncorrectoException, PagoInsuficienteException {
-        Producto b = null;
-        if (m == null){
-            throw new PagoIncorrectoException("Debe instanciar en algun valor la moneda (moneda null).\n");
-        } else {
-            Seleccionador producto = Seleccionador.fromPosicion(cual);
-            if(producto == null){
-                coin.addProducto(m);
-                throw new NoHayProductoException("No hay producto en el depósito.\n");
-            }else {
-                switch (producto) {
-                    /**
-                     * En caso que el producto seleccionado sea una cocacola, primero se validará que la cantidad de dinero sea suficiente para pagar el
-                     * producto, luego se verificará que exista stock del mismo. Una vez pasados estos filtros se calcula el vuelto en monedas de a 100 y se
-                     * llena el depósito de vuelto con la cantidad necesaria, y finalmente se entrega la cocacola. Esto es análogo para los demás productos
-                     */
-                    case COCACOLA:
-                        if (producto.COCACOLA.getPrecio() > m.getValor()) {
-                            coin.addProducto(m);
-                            throw new PagoInsuficienteException("El pago es insuficiente para comprar el producto.\n");
-                        } else if (producto.COCACOLA.getPrecio() == m.getValor()) {
-                            b = coca.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            return b;
-                        } else {
-                            b = coca.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            int n = (m.getValor() - producto.getPrecio()) / 100;
-                            for (int i = 0; i < n; i++) {
-                                coin.addProducto((new Moneda100()));
-                            }
-                            return b;
-                        }
-                    case SPRITE:
-                        if (producto.SPRITE.getPrecio() > m.getValor()) {
-                            coin.addProducto(m);
-                            throw new PagoInsuficienteException("El pago es insuficiente para comprar el producto.\n");
-                        } else if (Seleccionador.SPRITE.getPrecio() == m.getValor()) {
-                            b = sprite.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            return b;
-                        } else {
-                            b = sprite.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            int n = (m.getValor() - producto.getPrecio()) / 100;
-                            for (int i = 0; i < n; i++) {
-                                coin.addProducto(new Moneda100());
-                            }
-                            return b;
-                        }
-                    case FANTA:
-                        if (producto.FANTA.getPrecio() > m.getValor()) {
-                            coin.addProducto(m);
-                            throw new PagoInsuficienteException("El pago es insuficiente para comprar el producto.\n");
-                        } else if (producto.FANTA.getPrecio() == m.getValor()) {
-                            b = fanta.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            return b;
-                        } else {
-                            b = fanta.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            int n = (m.getValor() - producto.getPrecio()) / 100;
-                            for (int i = 0; i < n; i++) {
-                                coin.addProducto(new Moneda100());
-                            }
-                            return b;
-                        }
-                    case SNICKERS:
-                        if (producto.SNICKERS.getPrecio() > m.getValor()) {
-                            coin.addProducto(m);
-                            throw new PagoInsuficienteException("El pago es insuficiente para comprar el producto.\n");
-                        } else if (producto.SNICKERS.getPrecio() == m.getValor()) {
-                            b = snickers.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            return b;
-                        } else {
-                            b = snickers.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            int n = (m.getValor() - producto.getPrecio()) / 100;
-                            for (int i = 0; i < n; i++) {
-                                coin.addProducto(new Moneda100());
-                            }
-                            return b;
-                        }
-                    case SUPER8:
-                        if (producto.SUPER8.getPrecio() > m.getValor()) {
-                            coin.addProducto(m);
-                            throw new PagoInsuficienteException("El pago es insuficiente para comprar el producto.\n");
-                        } else if (producto.SUPER8.getPrecio() == m.getValor()) {
-                            b = super8.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            return b;
-                        } else {
-                            b = super8.getProducto();
-                            if (b == null) {
-                                coin.addProducto(m);
-                                throw new NoHayProductoException("No hay producto en el deposito.\n");
-                            }
-                            int n = (m.getValor() - producto.getPrecio()) / 100;
-                            for (int i = 0; i < n; i++) {
-                                coin.addProducto(new Moneda100());
-                            }
-                            return b;
-                        }
-                }
+    /** Método que rellena los depósitos de productos. */
+    public void rellenarDepositos() {
+        Map<List<Producto>, Seleccionador> productosMap = new HashMap<>();
+        productosMap.put((List<Producto>) coca, Seleccionador.COCACOLA);
+        productosMap.put((List<Producto>) sprite, Seleccionador.SPRITE);
+        productosMap.put((List<Producto>) fanta, Seleccionador.FANTA);
+        productosMap.put((List<Producto>) snickers, Seleccionador.SNICKERS);
+        productosMap.put((List<Producto>) super8, Seleccionador.SUPER8);
+
+        for (Map.Entry<List<Producto>, Seleccionador> entry : productosMap.entrySet()) {
+            List<Producto> listaProducto = entry.getKey();
+            Seleccionador seleccionadorProducto = entry.getValue();
+
+            for (int i = listaProducto.size(); i < size; i++) {
+                Producto producto = seleccionadorProducto.crearProducto(i + c);
+                listaProducto.add(producto);
+                c++;
             }
         }
-        return b;
     }
-    /**
-     * @return retorna una moneda del deposito de monedas.
-     */
+
+
+
+
+    public void comprarProducto(Moneda m, Seleccionador cual) throws NoHayProductoException, PagoIncorrectoException, PagoInsuficienteException {
+        /**
+         * Este método entrega un producto del Expendedor,
+         * en el caso de tener una compra exitosa (si no, hay excepciones).
+         * @param m corresponde a la moneda ingresada.
+         * @param cual es el producto que se seleccionó.
+         */
+        int i = cual.ordinal();
+        if(m == null){
+            throw new PagoIncorrectoException("El pago es incorrecto.");
+        }
+        else if(m.getValor() < cual.getPrecio()){
+            monedaVuelto.addProducto(m);
+            throw new PagoInsuficienteException("El pago es insuficiente.");
+        }
+        else if( depositos.get(cual.ordinal()).isEmpty() ) {
+            monedaVuelto.addProducto(m);
+            throw new NoHayProductoException("No hay producto." + cual.toString().toLowerCase());
+        }
+        else {
+            int vuelto = (m.getValor() - cual.getPrecio()) / 100;
+            for (int j = 0; j < vuelto; j++) {
+                monedaVuelto.addProducto(new Moneda100(j+1));
+            }
+            producto = depositos.get(i).getProducto();
+            monedaPago.addProducto(m);
+        }
+    }
+    /** @return retorna una moneda del deposito de monedas. */
     public Moneda getVuelto(){
         Moneda m = coin.getProducto();
         return m;
+    }
+    /** @return retorna el producto que se compró. */
+    public Producto getSeleccion() {
+        return producto;
     }
 }

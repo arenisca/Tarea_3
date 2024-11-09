@@ -22,9 +22,9 @@ class Comprador {
     private String sonido;
     private int vuelto = 0;
     private ArrayList<Moneda> monedas = new ArrayList<>();
-    public Comprador(Moneda m, int cualProducto, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
-        Producto b1 = exp.comprarProducto(m, cualProducto);
-
+    public Comprador(Moneda m, Seleccionador cualProducto, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+        exp.comprarProducto(m, cualProducto);
+        Producto b1 = exp.getSeleccion();
         /** Este ciclo se utilizará para que el comprador pueda retirar su vuelto */
         while (true) {
             Moneda a = exp.getVuelto();
