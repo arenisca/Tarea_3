@@ -10,7 +10,7 @@ import java.util.Map;
  * @version version 3, 07 de octubre 2024
  */
 
-class Expendedor {
+public class Expendedor {
     /** Clase: Expendedor de productos!
      * @code depositos serán los productos a almacenar
      * @code monedaPago la moneda con que se pagará
