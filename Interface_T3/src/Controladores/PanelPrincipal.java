@@ -1,9 +1,7 @@
+package Controladores;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.*;
-import javax.swing.JPanel;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 
 public class PanelPrincipal extends JPanel {//se ve en el centro de la ventana
