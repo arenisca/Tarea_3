@@ -1,6 +1,6 @@
 package Complementos;
 
-class PagoInsuficienteException extends Exception{
+public class PagoInsuficienteException extends Exception{
     /**
      * @param errorMessage Un mensaje especificando el problema
      */

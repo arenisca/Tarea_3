@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @version version 2, 03 de octubre 2024
  * @version version 3, 6 de noviembre 2024
  */
-class Comprador {
+public class Comprador {
     /**
      * Comprador representará: un comprador que tiene una moneda para pagar, una elección
      *                         de producto y un expendedor donde realizará su compra
