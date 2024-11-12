@@ -114,7 +114,7 @@ public class Expendedor {
         return m;
     }
     /** @return retorna el producto que se compró. */
-    public Producto getSeleccion() {
+    public Producto getProducto() {
         return producto;
     }
 }

@@ -24,7 +24,7 @@ class Comprador {
     private ArrayList<Moneda> monedas = new ArrayList<>();
     public Comprador(Moneda m, Seleccionador cualProducto, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
         exp.comprarProducto(m, cualProducto);
-        Producto b1 = exp.getSeleccion();
+        Producto b1 = exp.getProducto();
         /** Este ciclo se utilizará para que el comprador pueda retirar su vuelto */
         while (true) {
             Moneda a = exp.getVuelto();
