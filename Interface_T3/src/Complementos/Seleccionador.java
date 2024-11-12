@@ -55,7 +55,6 @@ public enum Seleccionador {
     };
 
     private final int precio;
-    //private final String nombreProducto;
 
     /**
      * Constructor de la clase Seleccionador
@@ -64,7 +63,6 @@ public enum Seleccionador {
      */
     Seleccionador(int precio) {
         this.precio = precio;
-        //this.nombreProducto = nombreProducto;
     }
 
     /**
