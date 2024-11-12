@@ -6,7 +6,7 @@ package Complementos;
  * Implementa el método {@code getValor}.
  */
 public class Moneda500 extends Moneda {
-    public Moneda500() { }
+    public Moneda500(int i) { }
     /**
      * @return el valor de la moneda --> 500
      */
