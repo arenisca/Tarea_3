@@ -58,23 +58,42 @@ public class Expendedor {
 
     /** Método que rellena los depósitos de productos. */
     public void rellenarDepositos() {
-        Map<List<Producto>, Seleccionador> productosMap = new HashMap<>();
-        productosMap.put((List<Producto>) coca, Seleccionador.COCACOLA);
-        productosMap.put((List<Producto>) sprite, Seleccionador.SPRITE);
-        productosMap.put((List<Producto>) fanta, Seleccionador.FANTA);
-        productosMap.put((List<Producto>) snickers, Seleccionador.SNICKERS);
-        productosMap.put((List<Producto>) super8, Seleccionador.SUPER8);
-
-        for (Map.Entry<List<Producto>, Seleccionador> entry : productosMap.entrySet()) {
-            List<Producto> listaProducto = entry.getKey();
-            Seleccionador seleccionadorProducto = entry.getValue();
-
-            for (int i = listaProducto.size(); i < size; i++) {
-                Producto producto = seleccionadorProducto.crearProducto(i + c);
-                listaProducto.add(producto);
+        if (coca.size() < size) {
+            for (int i = coca.size(); i < size; i++) {
+                Producto producto = Seleccionador.COCACOLA.crearProducto(i+c);
+                coca.addProducto(producto);
                 c++;
             }
         }
+        if (sprite.size() < size) {
+            for (int i = sprite.size(); i < size; i++) {
+                Producto producto = Seleccionador.SPRITE.crearProducto(i+c);
+                sprite.addProducto(producto);
+                c++;
+            }
+        }
+        if (fanta.size() < size) {
+            for (int i = fanta.size(); i < size; i++) {
+                Producto producto = Seleccionador.FANTA.crearProducto(i+c);
+                fanta.addProducto(producto);
+                c++;
+            }
+        }
+        if (snickers.size() < size) {
+            for (int i = snickers.size(); i < size; i++) {
+                Producto producto = Seleccionador.SNICKERS.crearProducto(i+c);
+                snickers.addProducto(producto);
+                c++;
+            }
+        }
+        if (super8.size() < size) {
+            for (int i = super8.size(); i < size; i++) {
+                Producto producto = Seleccionador.SUPER8.crearProducto(i+c);
+                super8.addProducto(producto);
+                c++;
+            }
+        }
+        
     }
 
 
@@ -87,7 +106,15 @@ public class Expendedor {
          * @param m corresponde a la moneda ingresada.
          * @param cual es el producto que se seleccionó.
          */
-        int i = cual.ordinal();
+        int i = 0;
+        if (cual == null) {
+            // Manejar el caso donde 'cual' es null, tal vez mostrar un mensaje de error
+            System.out.println("Error: el producto no ha sido seleccionado.");
+        } else {
+            // El código original donde 'cual' no es null
+            i = cual.ordinal();
+        }
+
         if(m == null){
             throw new PagoIncorrectoException("El pago es incorrecto.");
         }
