@@ -10,12 +10,12 @@ public class DepositoEstandar<T extends JComponent> extends JPanel {
     public DepositoEstandar(Supplier<T> tipo, int size) {
         this.size=size;
         this.tipo=tipo;
-        this.setBackground(Color.blue);
+        setLayout(new FlowLayout(FlowLayout.CENTER, -50,0));
+        this.setBackground(Color.gray);
         for (int i=0; i<5;i=i+1) {
             T imagen=tipo.get();
             add(imagen);
         }
-        setLayout(new FlowLayout(FlowLayout.CENTER, -50,0));
         setOpaque(false);
     }
     public void removeProducto(){

@@ -16,7 +16,6 @@ public class JPanelDepositos extends JPanel {
     private DepositoEstandar<ImagenSnickers> panelSnickers;
     private JPanelMonedas panelMonedas;
     private DepositoEstandar<ImagenProductoNulo> panelPNulo;
-    private final JPanel[] paneles = {panelCoca, panelFanta, panelSprite, panelSnickers, panelSuper8,};
     public JPanelDepositos(int size) {
         this.setBackground(Color.gray);
         setLayout(new GridLayout(7,1));
@@ -28,8 +27,10 @@ public class JPanelDepositos extends JPanel {
         this.panelSnickers = new DepositoEstandar<>(ImagenSnickers::new, size);
         this.panelPNulo = new DepositoEstandar<>(ImagenProductoNulo::new, size);
         this.panelMonedas = new JPanelMonedas();
+        add(panelCoca); add(panelSprite); add(panelFanta);
+        add(panelSnickers); add(panelSuper8); add(panelPNulo);
     }
-    public void actualizarMonedas(Moneda m) {panelMonedas.AñadirMonedaGrafica(m);}
+    public void actualizarMonedas(Moneda m) {panelMonedas.AñadirMonedasGrafica(m);}
     public void rellenarImagenes(){
         panelCoca.rellenarTodo();
         panelFanta.rellenarTodo();
