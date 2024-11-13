@@ -7,12 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 
 public class BotonSprite extends JRadioButton implements MouseListener {
     private JPanelSelect panelSelect;
-    private ImageIcon sprite;
-    private ImageIcon sprite_selecto;
+
     public BotonSprite(JPanelSelect panelSelect) {
         super("Valor: $1200");
         /** Esta forma de representar los iconos de los productos fue hecha gracias a Chat GPT
@@ -22,17 +22,15 @@ public class BotonSprite extends JRadioButton implements MouseListener {
          *                            imagen en el nuevo tamaño.
          * {@code getScaledInstance} Se utiliza para escalar una imagen según la necesidad.
          * */
-        ImageIcon iconoSprite = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/sprite.png")));
-        Image imagenSprite = iconoSprite.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        sprite = new ImageIcon(imagenSprite);
-
-        ImageIcon iconoSelecto = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/sprite_check.png")));
-        Image imagenSelecto = iconoSelecto.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        sprite_selecto = new ImageIcon(imagenSelecto);
+        URL urlsprite = getClass().getClassLoader().getResource("sprite.png");
+        URL urlSeleccionado = getClass().getClassLoader().getResource("sprite_check.png");
+        ImageIcon sprite = new ImageIcon(new ImageIcon(urlsprite).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon sprite_selecto= new ImageIcon(new ImageIcon(urlSeleccionado).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
         this.setIcon(sprite);
         this.setSelectedIcon(sprite_selecto);
         this.addMouseListener(this);
+        this.panelSelect = panelSelect;
         setBackground(new Color(0,255,255)); // nota! Editar color a gusto!!
 
     }

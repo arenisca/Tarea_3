@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 
 public class BotonCoca extends JRadioButton implements MouseListener {
@@ -22,17 +23,15 @@ public class BotonCoca extends JRadioButton implements MouseListener {
          *                            imagen en el nuevo tamaño.
          * {@code getScaledInstance} Se utiliza para escalar una imagen según la necesidad.
          * */
-        ImageIcon iconoCoca = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/coca.png")));
-        Image imagenCoca = iconoCoca.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        cocacola = new ImageIcon(imagenCoca);
-
-        ImageIcon iconoSelecto = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/coca_check.png")));
-        Image imagenSelecto = iconoSelecto.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        cocacola_selecto = new ImageIcon(imagenSelecto);
+        URL urlcokita = getClass().getClassLoader().getResource("coca.png");
+        URL urlSeleccionado = getClass().getClassLoader().getResource("coca_check.png");
+        ImageIcon cocacola = new ImageIcon(new ImageIcon(urlcokita).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon cocacola_selecto = new ImageIcon(new ImageIcon(urlSeleccionado).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
         this.setIcon(cocacola);
         this.setSelectedIcon(cocacola_selecto);
         this.addMouseListener(this);
+        this.panelSelect = panelSelect;
         setBackground(new Color(0,255,255)); // nota! Editar color a gusto!!
 
     }

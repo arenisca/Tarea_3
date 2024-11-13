@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 
 public class BotonFanta extends JRadioButton implements MouseListener {
@@ -22,17 +23,15 @@ public class BotonFanta extends JRadioButton implements MouseListener {
          *                            imagen en el nuevo tamaño.
          * {@code getScaledInstance} Se utiliza para escalar una imagen según la necesidad.
          * */
-        ImageIcon iconoFanta = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/fanta.png")));
-        Image imagenFanta = iconoFanta.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        fanta = new ImageIcon(imagenFanta);
-
-        ImageIcon iconoSelecto = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/fanta_check.png")));
-        Image imagenSelecto = iconoSelecto.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        fanta_selecto = new ImageIcon(imagenSelecto);
+        URL urlfanta = getClass().getClassLoader().getResource("fanta.png");
+        URL urlSeleccionado = getClass().getClassLoader().getResource("fanta_check.png");
+        ImageIcon fanta = new ImageIcon(new ImageIcon(urlfanta).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon fanta_selecto = new ImageIcon(new ImageIcon(urlSeleccionado).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
         this.setIcon(fanta);
         this.setSelectedIcon(fanta_selecto);
         this.addMouseListener(this);
+        this.panelSelect = panelSelect;
         setBackground(new Color(0,255,255)); // nota! Editar color a gusto!!
 
     }

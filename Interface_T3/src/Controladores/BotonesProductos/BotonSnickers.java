@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 
 public class BotonSnickers extends JRadioButton implements MouseListener {
@@ -22,17 +23,15 @@ public class BotonSnickers extends JRadioButton implements MouseListener {
          *                            imagen en el nuevo tamaño.
          * {@code getScaledInstance} Se utiliza para escalar una imagen según la necesidad.
          * */
-        ImageIcon iconoSnicker = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/snickers.png")));
-        Image imagenSnicker = iconoSnicker.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        snicker = new ImageIcon(imagenSnicker);
-
-        ImageIcon iconoSelecto = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/snicker_check.png")));
-        Image imagenSelecto = iconoSelecto.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        snicker_selecto = new ImageIcon(imagenSelecto);
+        URL urlsnicker = getClass().getClassLoader().getResource("snickers.png");
+        URL urlSeleccionado = getClass().getClassLoader().getResource("snicker_check.png");
+        ImageIcon snicker = new ImageIcon(new ImageIcon(urlsnicker).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon snicker_selecto = new ImageIcon(new ImageIcon(urlSeleccionado).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
         this.setIcon(snicker);
         this.setSelectedIcon(snicker_selecto);
         this.addMouseListener(this);
+        this.panelSelect = panelSelect;
         setBackground(new Color(0,255,255)); // nota! Editar color a gusto!!
 
     }

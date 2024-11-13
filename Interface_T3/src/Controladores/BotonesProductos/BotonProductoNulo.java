@@ -1,33 +1,86 @@
 package Controladores.BotonesProductos;
+
+import Complementos.Seleccionador;
+import Controladores.Jpanels.JPanelSelect;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-/**
- * El siguiente código fue creado gracias al uso de chatGPT.
- * Dado que necesito 6 botones y se me ha ocurrido usar el último como
- * un botón de producto nulo (agotado) */
-public class BotonProductoNulo extends JButton implements ActionListener {
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.URL;
+import java.util.Objects;
 
-    public BotonProductoNulo() {
-        super("Producto no disponible");
-        this.addActionListener(this);
+public class BotonProductoNulo extends JRadioButton implements MouseListener {
+    private JPanelSelect panelSelect;
+    public BotonProductoNulo(JPanelSelect panelSelect) {
+        super("Valor: $1200");
+        /** Esta forma de representar los iconos de los productos fue hecha gracias a Chat GPT
+         * utilizando la pregunta ¿Cómo puedo poner una imagen .png y modificar su tamaño para
+         * que aparezca con una escala de 80x80 px?
+         * {@code Image.SCALE_SMOOTH} suaviza la escala, lo cual mejora la calidad de la
+         *                            imagen en el nuevo tamaño.
+         * {@code getScaledInstance} Se utiliza para escalar una imagen según la necesidad.
+         * */
+        URL urlnulo = getClass().getClassLoader().getResource("productonulo.png");
+        URL urlSeleccionado = getClass().getClassLoader().getResource("productonulo.png");
+        ImageIcon pnulo = new ImageIcon(new ImageIcon(urlnulo).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        ImageIcon pnulo_selecto = new ImageIcon(new ImageIcon(urlSeleccionado).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+
+        this.setIcon(pnulo);
+        this.setSelectedIcon(pnulo_selecto);
+        this.addMouseListener(this);
+        this.panelSelect = panelSelect;
+        setBackground(new Color(0,255,255)); // nota! Editar color a gusto!!
+
     }
-
+    /**
+     * Invoked when the mouse button has been clicked (pressed
+     * and released) on a component.
+     *
+     * @param e the event to be processed
+     */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        // Muestra un mensaje que indica que no hay producto
-        JOptionPane.showMessageDialog(this, "Este producto no está disponible en este momento.", "Producto no disponible", JOptionPane.WARNING_MESSAGE);
+    public void mouseClicked(MouseEvent e) {
+        panelSelect.setTipoProducto(Seleccionador.FANTA);
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Botón Producto Nulo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
+    /**
+     * Invoked when a mouse button has been pressed on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mousePressed(MouseEvent e) {
 
-        BotonProductoNulo botonNulo = new BotonProductoNulo();
-        frame.add(botonNulo);
+    }
 
-        frame.setVisible(true);
+    /**
+     * Invoked when a mouse button has been released on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the mouse enters a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the mouse exits a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
-
