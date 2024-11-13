@@ -19,12 +19,12 @@ public class PanelExpendedor extends JPanel implements MouseListener {
     private Image expendedora;
 
     public PanelExpendedor(int t) {
-        super();
+
         this.exp = new Expendedor(t);
         this.addMouseListener(this);
 
-        URL imagenUrl = getClass().getClassLoader().getResource("/src/extras/Expendedora.png");
-        ImageIcon iconExpendedora = new ImageIcon(new ImageIcon(imagenUrl).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+        URL urlExp = getClass().getClassLoader().getResource("Expendedora.png");
+        ImageIcon iconExpendedora = new ImageIcon(new ImageIcon(urlExp).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
         expendedora = iconExpendedora.getImage();
 
         this.panelDepositos = new JPanelDepositos(t);
