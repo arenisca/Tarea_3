@@ -1,41 +1,49 @@
 package Controladores;
 import Complementos.Expendedor;
-import Controladores.PanelDepositos;
+import Controladores.Jpanels.DepositoCompra;
+import Controladores.Jpanels.JPanelDepositos;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
+
 import java.net.URL;
 import java.util.Objects;
 
 public class PanelExpendedor extends JPanel implements MouseListener {
-    private JPanelDepositos PanelDepositos;
+    private JPanelDepositos panelDepositos;
     private Expendedor exp;
-    private ImageIcon capadelantera;
-    private Image capafondo;
+    private DepositoCompra depositoCompra;
+    private ImageIcon iconExpendedora;
+    private Image expendedora;
 
-    public PanelExpendedor(int tamaño) {
-        this.exp = new Expendedor(tamaño);
+    public PanelExpendedor(int t) {
+        super();
+        this.exp = new Expendedor(t);
         this.addMouseListener(this);
-        ImageIcon iconoExpendedora = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/Expendedora.png")));
-        capafondo = iconoExpendedora.getImage();
 
-        this.PanelDepositos = new JPanelDepositos(tamaño);
-        Controladores.PanelDepositos.setPreferredSize(new Dimension(340,520));
+        URL imagenUrl = getClass().getClassLoader().getResource("/src/extras/Expendedora.png");
+        ImageIcon iconExpendedora = new ImageIcon(new ImageIcon(imagenUrl).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+        expendedora = iconExpendedora.getImage();
+
+        this.panelDepositos = new JPanelDepositos(t);
+        panelDepositos.setPreferredSize(new Dimension(380,520));
+        depositoCompra=new DepositoCompra();
+        add(depositoCompra);
+        add(panelDepositos);
 
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);   // se llama al paint de la super clase
         // se agrega la capa de fondo
-        if (capafondo != null) {
-            g.drawImage(capafondo, 0, 0, this.getWidth(), this.getHeight(), this);
+        if (expendedora != null) {
+            g.drawImage(expendedora, 0, 0, this.getWidth(), this.getHeight(), this);
         }
     }
     public Expendedor getExpendedor() { return exp;}
-
-    public JPanelDepositos getPanelDepositos() {
-        return PanelDepositos;
-    }
+    public DepositoCompra getDepositoCompra() { return depositoCompra;}
+    public JPanelDepositos getPanelDepositos() { return panelDepositos; }
 
     /**
      * Invoked when the mouse button has been clicked (pressed
@@ -44,7 +52,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        PanelDepositos.llenarImagenes();
+        panelDepositos.rellenarImagenes();
         exp.rellenarDepositos();
         updateUI();
     }

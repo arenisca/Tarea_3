@@ -2,6 +2,8 @@ package Controladores;
 
 import Complementos.Moneda;
 import Controladores.Jpanels.JPanelBilletera;
+import Controladores.Jpanels.JPanelCarrito;
+import Controladores.Jpanels.JPanelSelect;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -11,11 +13,11 @@ import java.util.ArrayList;
 public class PanelComprador extends JPanel {
     private JPanelSelect panel;
     private JPanelBilletera chauchero;
-    private JpanelCarrito bolsillo;
+    private JPanelCarrito bolsillo;
     private PanelVueltoCompra vuelto;
 
     public PanelComprador() {
-        panel = new JpanelSelect;
+        panel = new JPanelSelect();
         panel.setPreferredSize(new Dimension(600,200));
         panel.setBorder(new LineBorder(Color.black,3));
         JPanel panelAjustado = new JPanel(new FlowLayout());
@@ -27,16 +29,16 @@ public class PanelComprador extends JPanel {
         // Lo siguiente va a permitir mostrar el fondo de la ventana
         Ajustechauchero.setOpaque(false);
 
-        bolsillo = new JPanelCarro();
+        bolsillo = new JPanelCarrito();
         bolsillo.setPreferredSize(new Dimension(100,20));
-        vuelto = new JPanel();
+        vuelto = new PanelVueltoCompra();
         vuelto.setPreferredSize(new Dimension(100,20));
 
         add(bolsillo); add(vuelto); add(Ajustechauchero); add(panelAjustado);
     }
     public JPanelSelect getPanel() {return panel;}
     public JPanelBilletera getChauchas() {return chauchero;}
-    public JPanelCarro getBolsillo() {return bolsillo;}
+    public JPanelCarrito getBolsillo() {return bolsillo;}
     public void ActualizarBolsilloVuelto(ArrayList<Moneda> monedasComprador) {
         vuelto.RecibirVuelto(monedasComprador);
         updateUI();
