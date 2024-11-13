@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 
 public class BotonM2000 extends JButton implements MouseListener {
@@ -18,10 +19,10 @@ public class BotonM2000 extends JButton implements MouseListener {
     public BotonM2000(JPanelBilletera panelBilletera) {
         super();
         this.addMouseListener(this);
-        ImageIcon iconoM2000 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/moneda2000.jpg")));
-        M2000 = iconoM2000.getImage();
-        this.setIcon(iconoM2000);
-        this.setSelectedIcon(iconoM2000);
+        URL urlM2000 = getClass().getClassLoader().getResource("moneda2000.jpg");
+        ImageIcon m2000 = new ImageIcon(new ImageIcon(urlM2000).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        this.setIcon(m2000);
+        this.setSelectedIcon(m2000);
         this.panelBilletera = panelBilletera;
     }
 

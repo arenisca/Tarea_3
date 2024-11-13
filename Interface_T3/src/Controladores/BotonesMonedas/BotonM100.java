@@ -7,20 +7,20 @@ import Controladores.Jpanels.JPanelBilletera;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Objects;
 import javax.swing.*;
 
 public class BotonM100 extends JButton implements MouseListener {
     private JPanelBilletera panelBilletera;
-    private Image M100;
     private int contador=123;
     public BotonM100(JPanelBilletera panelBilletera){
         super();
         this.addMouseListener(this);
-        ImageIcon iconoM100 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/extras/moneda100.png")));
-        M100 = iconoM100.getImage();
-        this.setIcon(iconoM100);
-        this.setSelectedIcon(iconoM100);
+        URL urlM100 = getClass().getClassLoader().getResource("moneda100.png");
+        ImageIcon m100 = new ImageIcon(new ImageIcon(urlM100).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        this.setIcon(m100);
+        this.setSelectedIcon(m100);
         this.panelBilletera =panelBilletera;
     }
 
