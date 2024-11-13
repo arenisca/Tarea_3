@@ -12,7 +12,7 @@ public class ImagenCoca extends JPanel {
     private Image imagen;
     public ImagenCoca() {
         setOpaque(false);
-        URL imagenURL = getClass().getClassLoader().getResource("coca.png");
+        URL imagenURL = getClass().getClassLoader().getResource("/src/extras/coca.png");
         try{
             imagen = ImageIO.read(imagenURL);
             int ancho = 70;
