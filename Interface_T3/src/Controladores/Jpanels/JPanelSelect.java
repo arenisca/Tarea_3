@@ -26,7 +26,7 @@ public class JPanelSelect extends JPanel {
         b3=new BotonCoca(this);
         b4=new BotonFanta(this);
         b5=new BotonSprite(this);
-        b6=null;
+        b6=new BotonProductoNulo(this);
         setLayout(new GridLayout(3,2));
         ButtonGroup productos = new ButtonGroup();
         productos.add(b1); productos.add(b2); productos.add(b3);
