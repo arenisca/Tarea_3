@@ -1,3 +1,9 @@
 Hola, esta es una prueba
 Soy Valentina Serón desde Concepción, Chile
 Saludos!
+
+Nota: 13 de noviembre 2024
+    Falta el UML, pasarlo a diagrama virtual
+    Falta arreglar los errores de compilación (seguramente
+    confundí algún parámetro o excribí mal una constante ¿?)
+    Falta añadir JavaDocs de la carpeta Controladores.
