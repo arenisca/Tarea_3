@@ -8,9 +8,9 @@
 * @author : Valentina Serón Canales
 * @version : 1.0 al 5 de noviembre, 2024
  */
-public class Main {
-    public static void main(String[] args) {
-        Ventana v = new Ventana(); //única sentencia
-    }
-}
+//public class Main {
+//    public static void main(String[] args) {
+//        Ventana v = new Ventana(); //única sentencia
+//    }
+//}
 
